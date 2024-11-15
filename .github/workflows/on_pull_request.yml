@@ -1,0 +1,22 @@
+name: Run Tests on Pull Request
+
+on:
+  pull_request:
+    branches:
+      - 'main'  # Triggers on pull requests to any branch
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    env:
+      ENV_VAR: ${{ secrets.ENV_VAR }}
+      ENV_SECRET: ${{ secrets.ENV_SECRET }}
+      REPO_SECRET: ${{ secrets.REPO_SECRET }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3  # Checks out the repository code
+
+      - name: Run test script
+        run: bash ./test.sh  # Executes the test.sh script
